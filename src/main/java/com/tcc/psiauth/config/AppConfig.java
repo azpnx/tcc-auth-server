@@ -16,7 +16,7 @@ public class AppConfig {
     private String keyJwt;
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+    public static BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
