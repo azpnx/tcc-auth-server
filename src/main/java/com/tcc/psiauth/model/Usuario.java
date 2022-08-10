@@ -8,10 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
@@ -21,7 +18,7 @@ public class Usuario implements UserDetails {
     private Integer id;
     private String email;
     private String password;
-    private AppUserRoleEnum appUserRoleEnum = AppUserRoleEnum.USER;
+    private String role;
 
     @Override
     public String getUsername() {
@@ -30,10 +27,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(
-                appUserRoleEnum.name()
-        );
-        return Collections.singletonList(authority);
+        return Collections.singleton(new SimpleGrantedAuthority(role));
     }
 
     @Override
