@@ -37,7 +37,7 @@ public class UsuarioService implements UserDetailsService {
             logger.error("Usuário não encontrado!");
             throw new UsernameNotFoundException("Email not found");
         }
-        if (usuario.isEnabled()) throw new UserDeniedAuthorizationException("Confirme o seu e-mail para prosseguir!");
+        if (!usuario.isEnabled()) throw new UserDeniedAuthorizationException("Confirme o seu e-mail para prosseguir!");
         logger.info("Usuario encontrado! ");
         return usuario;
     }

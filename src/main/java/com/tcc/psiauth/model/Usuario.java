@@ -20,7 +20,7 @@ public class Usuario implements UserDetails {
     private String password;
     private String role;
     private Boolean blocked = false;
-    private Boolean enabled = false;
+    private Boolean enabled;
     @Override
     public String getUsername() {
         return email;
@@ -48,6 +48,6 @@ public class Usuario implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }
