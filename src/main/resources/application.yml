@@ -10,6 +10,9 @@ config:
 spring:
   application:
     name: psi-auth
+  sleuth:
+    sampler:
+      probability: 1.0
 
 eureka:
   client:
