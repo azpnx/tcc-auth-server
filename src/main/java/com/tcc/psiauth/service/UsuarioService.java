@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.common.exceptions.UserDeniedAuthorizationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,8 +23,9 @@ public class UsuarioService implements UserDetailsService {
         Usuario usuario = userClient.findByEmail(email).getBody();
         if (usuario == null){
             logger.error("Usuário não encontrado!");
-            throw new IllegalArgumentException("Email not found");
+            throw new UsernameNotFoundException("Usuário não encontrado!");
         }
+        if (!usuario.isEnabled()) throw new UserDeniedAuthorizationException("Confirme o seu e-mail para prosseguir!");
         logger.info("Usuario encontrado! ");
         return usuario;
     }
@@ -35,6 +37,7 @@ public class UsuarioService implements UserDetailsService {
             logger.error("Usuário não encontrado!");
             throw new UsernameNotFoundException("Email not found");
         }
+        if (!usuario.isEnabled()) throw new UserDeniedAuthorizationException("Confirme o seu e-mail para prosseguir!");
         logger.info("Usuario encontrado! ");
         return usuario;
     }
