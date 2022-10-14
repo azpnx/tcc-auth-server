@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface UserClient {
 
 
-    @GetMapping
+    @GetMapping("/findByEmail")
     ResponseEntity<Usuario> findByEmail(@RequestParam String email);
 
 }
